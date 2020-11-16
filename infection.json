@@ -1,0 +1,31 @@
+{
+  "timeout": 1000,
+  "source": {
+    "directories": [
+      "src\/Aeon"
+    ],
+    "excludes": [
+      "/.*\\.phpt/"
+    ]
+  },
+  "logs": {
+    "text": "./var/infection/infection.log",
+    "summary": "./var/infection/infection_summary.log",
+    "debug": "./var/infection/infection_summary.log",
+    "badge": {
+      "branch": "1.x"
+    }
+  },
+  "mutators": {
+    "@default": true,
+    "UnwrapArrayValues": {
+      "ignore": [
+        "Aeon\\RateLimiter\\Storage\\MemoryStorage::hits"
+      ]
+    }
+  },
+  "testFramework": "phpunit",
+  "bootstrap": "./vendor/autoload.php",
+  "minMsi": 86,
+  "minCoveredMsi": 100
+}
