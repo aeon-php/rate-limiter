@@ -26,6 +26,6 @@
   },
   "testFramework": "phpunit",
   "bootstrap": "./vendor/autoload.php",
-  "minMsi": 86,
+  "minMsi": 100,
   "minCoveredMsi": 100
 }
