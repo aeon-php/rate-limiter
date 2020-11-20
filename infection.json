@@ -22,6 +22,16 @@
       "ignore": [
         "Aeon\\RateLimiter\\Storage\\MemoryStorage::hits"
       ]
+    },
+    "DecrementInteger": {
+      "ignore": [
+        "Aeon\\RateLimiter\\Storage\\PSRCacheStorage::all"
+      ]
+    },
+    "IncrementInteger": {
+      "ignore": [
+        "Aeon\\RateLimiter\\Storage\\PSRCacheStorage::all"
+      ]
     }
   },
   "testFramework": "phpunit",

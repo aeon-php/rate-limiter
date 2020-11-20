@@ -26,6 +26,14 @@ final class Hit
         $this->ttl = $ttl;
     }
 
+    /**
+     * @param array{id: string, datetime: string, ttl: string} $data
+     */
+    public static function fromArray(array $data) : self
+    {
+        return new self($data['id'], DateTime::fromString($data['datetime']), TimeUnit::precise((float) $data['ttl']));
+    }
+
     public function expired(Calendar $calendar) : bool
     {
         return !$this->dateTime->add($this->ttl)->isAfterOrEqual($calendar->now());
@@ -41,5 +49,17 @@ final class Hit
         $ttlLeft = $calendar->now()->until($this->dateTime->add($this->ttl))->distance();
 
         return $ttlLeft->isPositive() ? $ttlLeft : TimeUnit::seconds(0);
+    }
+
+    /**
+     * @return array{id: string, datetime: string, ttl: string}
+     */
+    public function normalize() : array
+    {
+        return [
+            'id' => $this->id,
+            'datetime' => $this->dateTime->toISO8601(),
+            'ttl' => $this->ttl->inSecondsPrecise(),
+        ];
     }
 }

@@ -6,12 +6,13 @@ namespace Aeon\RateLimiter\Tests\Unit\Storage;
 
 use Aeon\Calendar\Gregorian\Calendar;
 use Aeon\RateLimiter\Storage;
-use Aeon\RateLimiter\Storage\MemoryStorage;
+use Aeon\RateLimiter\Storage\PSRCacheStorage;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
-final class MemoryStorageTest extends StorageTestCase
+final class PSRStorageTest extends StorageTestCase
 {
     protected function storage(Calendar $calendar) : Storage
     {
-        return new MemoryStorage($calendar);
+        return new PSRCacheStorage(new ArrayAdapter(), $calendar);
     }
 }

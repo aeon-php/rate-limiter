@@ -12,10 +12,12 @@ use Aeon\RateLimiter\Storage;
 
 final class MemoryStorage implements Storage
 {
+    use StorageIdNormalizer;
+
     private Calendar $calendar;
 
     /**
-     * @var array<string, array<Hit>>
+     * @var array<string, Hits>
      */
     private array $hits;
 
@@ -28,44 +30,31 @@ final class MemoryStorage implements Storage
     public function addHit(string $id, TimeUnit $ttl) : void
     {
         if (!$this->hasFor($id)) {
-            $this->hits[$this->normalize($id)] = [];
+            $this->hits[$this->normalize($id)] = new Hits(new Hit($id, $this->calendar->now(), $ttl));
+        } else {
+            $this->hits[$this->normalize($id)] = $this->hits($this->normalize($id))
+                ->add(new Hit($id, $this->calendar->now(), $ttl))
+                ->filterExpired($this->calendar);
         }
-
-        $this->hits[$this->normalize($id)][] = new Hit($id, $this->calendar->now(), $ttl);
     }
 
     public function all(string $id) : Hits
     {
-        return new Hits(...$this->hits($id));
+        return $this->hits($id);
     }
 
     public function count(string $id) : int
     {
-        return \count($this->hits($id));
+        return $this->hits($id)->count();
     }
 
-    /**
-     * @return array<Hit>
-     */
-    private function hits(string $id) : array
+    private function hits(string $id) : Hits
     {
         if (!$this->hasFor($id)) {
-            return [];
+            return new Hits();
         }
 
-        $hits = [];
-        /** @var Hit $hit */
-        foreach ($this->hits[$this->normalize($id)] as $i => $hit) {
-            if (!$hit->expired($this->calendar)) {
-                $hits[] = $hit;
-            } else {
-                unset($this->hits[$this->normalize($id)][$i]);
-            }
-        }
-
-        $this->hits[$this->normalize($id)] = \array_values($this->hits[$this->normalize($id)]);
-
-        return $hits;
+        return $this->hits[$this->normalize($id)]->filterExpired($this->calendar);
     }
 
     private function hasFor(string $id) : bool
@@ -75,10 +64,5 @@ final class MemoryStorage implements Storage
         }
 
         return true;
-    }
-
-    private function normalize(string $id) : string
-    {
-        return \mb_strtolower($id);
     }
 }
