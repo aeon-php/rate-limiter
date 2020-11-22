@@ -20,7 +20,7 @@ final class SlidingWindowAlgorithmTest extends TestCase
         $algorithm = new SlidingWindowAlgorithm($calendar = new GregorianCalendarStub(TimeZone::UTC()), 2, TimeUnit::minute());
         $algorithm->hit('hit_id', $memoryStorage = new MemoryStorage($calendar));
 
-        $this->assertSame($algorithm->nextHit('hit_id', $memoryStorage)->inSeconds(), 0);
+        $this->assertSame($algorithm->estimate('hit_id', $memoryStorage)->inSeconds(), 0);
     }
 
     public function test_without_available_hits() : void
@@ -28,7 +28,7 @@ final class SlidingWindowAlgorithmTest extends TestCase
         $algorithm = new SlidingWindowAlgorithm($calendar = new GregorianCalendarStub(TimeZone::UTC()), 1, TimeUnit::minute());
         $algorithm->hit('hit_id', $memoryStorage = new MemoryStorage($calendar));
 
-        $this->assertSame($algorithm->nextHit('hit_id', $memoryStorage)->inSeconds(), 59);
+        $this->assertSame($algorithm->estimate('hit_id', $memoryStorage)->inSeconds(), 59);
     }
 
     public function test_hit_without_available_hits() : void
@@ -66,22 +66,27 @@ final class SlidingWindowAlgorithmTest extends TestCase
 
         $calendar->setNow(DateTime::fromString('2020-01-01 00:00:00 UTC'));
 
-        $algorithm->hit('hit_id', $memoryStorage = new MemoryStorage($calendar));
+        $this->assertSame(1, $algorithm->capacity('hit_id', $storage = new MemoryStorage($calendar)));
+        $algorithm->hit('hit_id', $storage);
+        $this->assertSame(0, $algorithm->capacity('hit_id', $storage));
 
-        $this->assertSame($algorithm->nextHit('hit_id', $memoryStorage)->inSeconds(), 60);
-
-        $calendar->setNow($calendar->now()->add(TimeUnit::seconds(61)));
-
-        $this->assertSame($algorithm->nextHit('hit_id', $memoryStorage)->inSeconds(), 0);
-
-        $algorithm->hit('hit_id', $memoryStorage);
-
-        $this->assertSame($algorithm->nextHit('hit_id', $memoryStorage)->inSeconds(), 60);
+        $this->assertSame($algorithm->estimate('hit_id', $storage)->inSeconds(), 60);
 
         $calendar->setNow($calendar->now()->add(TimeUnit::seconds(61)));
 
-        $this->assertSame($algorithm->nextHit('hit_id', $memoryStorage)->inSeconds(), 0);
+        $this->assertSame(1, $algorithm->capacity('hit_id', $storage));
+        $this->assertSame($algorithm->estimate('hit_id', $storage)->inSeconds(), 0);
 
-        $algorithm->hit('hit_id', $memoryStorage);
+        $algorithm->hit('hit_id', $storage);
+
+        $this->assertSame(0, $algorithm->capacity('hit_id', $storage));
+        $this->assertSame($algorithm->estimate('hit_id', $storage)->inSeconds(), 60);
+
+        $calendar->setNow($calendar->now()->add(TimeUnit::seconds(61)));
+
+        $this->assertSame(1, $algorithm->capacity('hit_id', $storage));
+        $this->assertSame($algorithm->estimate('hit_id', $storage)->inSeconds(), 0);
+
+        $algorithm->hit('hit_id', $storage);
     }
 }

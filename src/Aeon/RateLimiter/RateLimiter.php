@@ -30,7 +30,12 @@ final class RateLimiter
 
     public function estimate(string $id) : TimeUnit
     {
-        return $this->algorithm->nextHit($id, $this->storage);
+        return $this->algorithm->estimate($id, $this->storage);
+    }
+
+    public function capacity(string $id) : int
+    {
+        return $this->algorithm->capacity($id, $this->storage);
     }
 
     public function throttle(string $id, Process $process) : void

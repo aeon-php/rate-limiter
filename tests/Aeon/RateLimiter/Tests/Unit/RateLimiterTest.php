@@ -33,7 +33,7 @@ final class RateLimiterTest extends TestCase
     public function test_estimate_method_throwing_exception() : void
     {
         $algorithm = $this->createStub(Algorithm::class);
-        $algorithm->method('nextHit')->willReturn(TimeUnit::second());
+        $algorithm->method('estimate')->willReturn(TimeUnit::second());
 
         $rateLimiter = new RateLimiter(
             $algorithm,
@@ -56,6 +56,19 @@ final class RateLimiterTest extends TestCase
         $process->expects($this->never())->method('sleep');
 
         $rateLimiter->throttle('id', $process);
+    }
+
+    public function test_capacity() : void
+    {
+        $algorithm = $this->createStub(Algorithm::class);
+        $algorithm->method('capacity')->willReturn(10);
+
+        $rateLimiter = new RateLimiter(
+            $algorithm,
+            $this->createMock(Storage::class)
+        );
+
+        $this->assertSame(10, $rateLimiter->capacity('id'));
     }
 
     public function test_throttle_and_wait() : void

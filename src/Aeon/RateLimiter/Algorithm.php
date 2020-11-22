@@ -17,5 +17,10 @@ interface Algorithm
     /**
      * Estimate the time in which next hit is allowed.
      */
-    public function nextHit(string $id, Storage $storage) : TimeUnit;
+    public function estimate(string $id, Storage $storage) : TimeUnit;
+
+    /**
+     * Return hits left before throttling next hit.
+     */
+    public function capacity(string $id, Storage $storage) : int;
 }

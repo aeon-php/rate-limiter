@@ -43,7 +43,7 @@ final class SlidingWindowAlgorithm implements Algorithm
     /**
      * @psalm-suppress PossiblyNullReference
      */
-    public function nextHit(string $id, Storage $storage) : TimeUnit
+    public function estimate(string $id, Storage $storage) : TimeUnit
     {
         $hits = $storage->all($id);
 
@@ -53,5 +53,12 @@ final class SlidingWindowAlgorithm implements Algorithm
         }
 
         return TimeUnit::seconds(0);
+    }
+
+    public function capacity(string $id, Storage $storage) : int
+    {
+        $hits = $storage->all($id);
+
+        return $this->limit - $hits->count();
     }
 }
