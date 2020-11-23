@@ -28,6 +28,11 @@ final class LeakyBucketAlgorithm implements Algorithm
         $this->leakTime = $leakTime;
     }
 
+    public function capacityInitial() : int
+    {
+        return $this->bucketSize;
+    }
+
     /**
      * @psalm-suppress PossiblyNullReference
      */
@@ -65,5 +70,17 @@ final class LeakyBucketAlgorithm implements Algorithm
         $hits = $storage->all($id);
 
         return $this->bucketSize - $hits->count();
+    }
+
+    /**
+     * @psalm-suppress InvalidNullableReturnType
+     * @psalm-suppress NullableReturnStatement
+     */
+    public function resetIn(string $id, Storage $storage) : TimeUnit
+    {
+        $hits = $storage->all($id);
+
+        /** @phpstan-ignore-next-line */
+        return $hits->count() ? $hits->longestTTL($this->calendar) : TimeUnit::seconds(0);
     }
 }

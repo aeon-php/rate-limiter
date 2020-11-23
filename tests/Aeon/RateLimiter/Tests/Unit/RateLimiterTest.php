@@ -71,6 +71,19 @@ final class RateLimiterTest extends TestCase
         $this->assertSame(10, $rateLimiter->capacity('id'));
     }
 
+    public function test_capacity_initial() : void
+    {
+        $algorithm = $this->createStub(Algorithm::class);
+        $algorithm->method('capacityInitial')->willReturn(10);
+
+        $rateLimiter = new RateLimiter(
+            $algorithm,
+            $this->createMock(Storage::class)
+        );
+
+        $this->assertSame(10, $rateLimiter->capacityInitial());
+    }
+
     public function test_throttle_and_wait() : void
     {
         $algorithm = $this->createMock(Algorithm::class);
@@ -90,5 +103,18 @@ final class RateLimiterTest extends TestCase
         $process->expects($this->once())->method('sleep')->with($sleepTime);
 
         $rateLimiter->throttle('id', $process);
+    }
+
+    public function test_resets_in() : void
+    {
+        $algorithm = $this->createStub(Algorithm::class);
+        $algorithm->method('resetIn')->willReturn(TimeUnit::seconds(10));
+
+        $rateLimiter = new RateLimiter(
+            $algorithm,
+            $this->createMock(Storage::class)
+        );
+
+        $this->assertSame(10, $rateLimiter->resetIn('id')->inSeconds());
     }
 }

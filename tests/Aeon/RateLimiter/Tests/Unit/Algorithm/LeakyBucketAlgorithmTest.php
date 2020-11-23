@@ -23,6 +23,8 @@ final class LeakyBucketAlgorithmTest extends TestCase
         $algorithm = new LeakyBucketAlgorithm($calendar, $bucketSize = 5, $leakSize = 2, TimeUnit::seconds(10));
 
         $this->assertSame($bucketSize, $algorithm->capacity('id', $storage = new MemoryStorage($calendar)));
+        $this->assertSame($bucketSize, $algorithm->capacityInitial());
+        $this->assertSame(0, $algorithm->resetIn('id', $storage)->inSeconds());
 
         $algorithm->hit('id', $storage);
         $algorithm->hit('id', $storage);
@@ -42,6 +44,28 @@ final class LeakyBucketAlgorithmTest extends TestCase
         $algorithm->hit('id', $storage);
 
         $this->assertSame('9.999000', $algorithm->estimate('id', $storage)->inSecondsPrecise());
+    }
+
+    public function test_resets_in() : void
+    {
+        $calendar = new GregorianCalendarStub(TimeZone::UTC());
+        $calendar->setNow(DateTime::fromString('2020-01-01 00:00:00 UTC'));
+
+        $algorithm = new LeakyBucketAlgorithm($calendar, $bucketSize = 5, $leakSize = 2, TimeUnit::seconds(10));
+
+        $this->assertSame($bucketSize, $algorithm->capacity('id', $storage = new MemoryStorage($calendar)));
+
+        $algorithm->hit('id', $storage);
+        $algorithm->hit('id', $storage);
+        $algorithm->hit('id', $storage);
+        $algorithm->hit('id', $storage);
+        $algorithm->hit('id', $storage);
+
+        $this->assertSame(30, $algorithm->resetIn('id', $storage)->inSeconds());
+
+        $calendar->setNow($calendar->now()->add(TimeUnit::seconds(30)->add(TimeUnit::millisecond())));
+
+        $this->assertSame(5, $algorithm->capacity('id', $storage));
     }
 
     public function test_leaky_bucket_algorithm_with_too_many_hits() : void

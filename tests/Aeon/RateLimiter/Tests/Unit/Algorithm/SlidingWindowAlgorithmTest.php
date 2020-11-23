@@ -67,6 +67,9 @@ final class SlidingWindowAlgorithmTest extends TestCase
         $calendar->setNow(DateTime::fromString('2020-01-01 00:00:00 UTC'));
 
         $this->assertSame(1, $algorithm->capacity('hit_id', $storage = new MemoryStorage($calendar)));
+        $this->assertSame(1, $algorithm->capacityInitial());
+        $this->assertSame(0, $algorithm->resetIn('hit_id', $storage)->inSeconds());
+
         $algorithm->hit('hit_id', $storage);
         $this->assertSame(0, $algorithm->capacity('hit_id', $storage));
 
@@ -88,5 +91,21 @@ final class SlidingWindowAlgorithmTest extends TestCase
         $this->assertSame($algorithm->estimate('hit_id', $storage)->inSeconds(), 0);
 
         $algorithm->hit('hit_id', $storage);
+    }
+
+    public function test_resets_in() : void
+    {
+        $algorithm = new SlidingWindowAlgorithm($calendar = new GregorianCalendarStub(TimeZone::UTC()), 1, TimeUnit::minute());
+
+        $calendar->setNow(DateTime::fromString('2020-01-01 00:00:00 UTC'));
+
+        $this->assertSame(1, $algorithm->capacity('hit_id', $storage = new MemoryStorage($calendar)));
+        $algorithm->hit('hit_id', $storage);
+        $this->assertSame(0, $algorithm->capacity('hit_id', $storage));
+        $this->assertSame(60, $algorithm->resetIn('hit_id', $storage)->inSeconds());
+
+        $calendar->setNow($calendar->now()->add(TimeUnit::seconds(61)));
+
+        $this->assertSame(1, $algorithm->capacity('hit_id', $storage));
     }
 }

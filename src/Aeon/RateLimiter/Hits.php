@@ -6,6 +6,7 @@ namespace Aeon\RateLimiter;
 
 use Aeon\Calendar\Gregorian\Calendar;
 use Aeon\Calendar\Gregorian\DateTime;
+use Aeon\Calendar\TimeUnit;
 
 /**
  * @psalm-immutable
@@ -82,5 +83,24 @@ final class Hits implements \Countable
         }
 
         return $hitsData;
+    }
+
+    public function longestTTL(Calendar $calendar) : ?TimeUnit
+    {
+        $longestTTL = null;
+
+        foreach ($this->hits as $hit) {
+            if ($longestTTL === null) {
+                $longestTTL = $hit;
+
+                continue;
+            }
+
+            if ($hit->ttlLeft($calendar)->isGreaterThan($longestTTL->ttlLeft($calendar))) {
+                $longestTTL = $hit;
+            }
+        }
+
+        return $longestTTL ? $longestTTL->ttlLeft($calendar) : null;
     }
 }

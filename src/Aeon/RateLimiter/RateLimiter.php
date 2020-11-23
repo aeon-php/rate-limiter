@@ -48,6 +48,22 @@ final class RateLimiter
     }
 
     /**
+     * Initial available capacity before registering any hits or when all hits time out.
+     */
+    public function capacityInitial() : int
+    {
+        return $this->algorithm->capacityInitial();
+    }
+
+    /**
+     * Time required to fully reset to the total capacity.
+     */
+    public function resetIn(string $id) : TimeUnit
+    {
+        return $this->algorithm->resetIn($id, $this->storage);
+    }
+
+    /**
      * Try to record next hit, in case of rate limit exception take the cooldown time and sleep current process.
      */
     public function throttle(string $id, Process $process) : void

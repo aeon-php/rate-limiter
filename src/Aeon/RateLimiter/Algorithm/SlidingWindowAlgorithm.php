@@ -25,6 +25,11 @@ final class SlidingWindowAlgorithm implements Algorithm
         $this->timeWindow = $timeWindow;
     }
 
+    public function capacityInitial() : int
+    {
+        return $this->limit;
+    }
+
     /**
      * @psalm-suppress PossiblyNullReference
      */
@@ -60,5 +65,17 @@ final class SlidingWindowAlgorithm implements Algorithm
         $hits = $storage->all($id);
 
         return $this->limit - $hits->count();
+    }
+
+    /**
+     * @psalm-suppress InvalidNullableReturnType
+     * @psalm-suppress NullableReturnStatement
+     */
+    public function resetIn(string $id, Storage $storage) : TimeUnit
+    {
+        $hits = $storage->all($id);
+
+        /** @phpstan-ignore-next-line */
+        return $hits->count() ? $hits->longestTTL($this->calendar) : TimeUnit::seconds(0);
     }
 }
