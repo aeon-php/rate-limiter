@@ -23,4 +23,14 @@ interface Algorithm
      * Return hits left before throttling next hit.
      */
     public function capacity(string $id, Storage $storage) : int;
+
+    /**
+     * Time required to fully reset hits limit.
+     */
+    public function resetIn(string $id, Storage $storage) : TimeUnit;
+
+    /**
+     * Initial available capacity before registering any hits or when all hits time out.
+     */
+    public function capacityInitial() : int;
 }
