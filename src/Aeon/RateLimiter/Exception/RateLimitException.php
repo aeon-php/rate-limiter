@@ -10,14 +10,20 @@ final class RateLimitException extends RuntimeException
 {
     private string $id;
 
-    private TimeUnit $cooldown;
+    private int $limit;
 
-    public function __construct(string $id, TimeUnit $cooldown, \Throwable $previous = null)
+    private TimeUnit $retryIn;
+
+    private TimeUnit $reset;
+
+    public function __construct(string $id, int $limit, TimeUnit $retryIn, TimeUnit $reset, \Throwable $previous = null)
     {
-        parent::__construct("Execution \"{$id}\" was limited for the next " . $cooldown->inSecondsPrecise() . ' seconds', 0, $previous);
+        parent::__construct("Execution \"{$id}\" was limited for the next " . $retryIn->inSecondsPrecise() . ' seconds', 0, $previous);
 
         $this->id = $id;
-        $this->cooldown = $cooldown;
+        $this->limit = $limit;
+        $this->retryIn = $retryIn;
+        $this->reset = $reset;
     }
 
     public function id() : string
@@ -25,8 +31,18 @@ final class RateLimitException extends RuntimeException
         return $this->id;
     }
 
-    public function cooldown() : TimeUnit
+    public function limit() : int
     {
-        return $this->cooldown;
+        return $this->limit;
+    }
+
+    public function retryIn() : TimeUnit
+    {
+        return $this->retryIn;
+    }
+
+    public function reset() : TimeUnit
+    {
+        return $this->reset;
     }
 }

@@ -41,8 +41,13 @@ final class LeakyBucketAlgorithm implements Algorithm
         $hits = $storage->all($id);
 
         if ($hits->count() >= $this->bucketSize) {
-            /** @phpstan-ignore-next-line */
-            throw new RateLimitException($id, $hits->oldest()->ttlLeft($this->calendar));
+            throw new RateLimitException(
+                $id,
+                $this->capacityInitial(),
+                /** @phpstan-ignore-next-line */
+                $hits->oldest()->ttlLeft($this->calendar),
+                $this->resetIn($id, $storage)
+            );
         }
 
         $ttl = TimeUnit::seconds((int) (\floor($hits->count() / $this->leakSize) * $this->leakTime->inSeconds() + $this->leakTime->inSeconds()));

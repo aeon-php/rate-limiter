@@ -17,7 +17,7 @@ final class RateLimiterTest extends TestCase
     public function test_hit_method_throwing_exception() : void
     {
         $algorithm = $this->createStub(Algorithm::class);
-        $algorithm->method('hit')->willThrowException(new RateLimitException('id', TimeUnit::seconds(10)));
+        $algorithm->method('hit')->willThrowException($exception = new RateLimitException('id', 2, TimeUnit::seconds(10), TimeUnit::seconds(10)));
 
         $rateLimiter = new RateLimiter(
             $algorithm,
@@ -26,6 +26,8 @@ final class RateLimiterTest extends TestCase
 
         $this->expectExceptionMessage(RateLimitException::class);
         $this->expectExceptionMessage('Execution "id" was limited for the next 10.000000 seconds');
+        $this->assertSame(2, $exception->limit());
+        $this->assertSame(10, $exception->reset()->inSeconds());
 
         $rateLimiter->hit('id');
     }
@@ -90,7 +92,7 @@ final class RateLimiterTest extends TestCase
         $algorithm->expects($this->exactly(2))
             ->method('hit')
             ->willReturnOnConsecutiveCalls(
-                $this->throwException(new RateLimitException('id', $sleepTime = TimeUnit::seconds(10))),
+                $this->throwException(new RateLimitException('id', 2, $sleepTime = TimeUnit::seconds(10), TimeUnit::seconds(10))),
                 null
             );
 

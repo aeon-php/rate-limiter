@@ -56,7 +56,7 @@ final class SlidingWindowAlgorithmTest extends TestCase
             $algorithm->hit('hit_id', $memoryStorage);
         } catch (RateLimitException $e) {
             $this->assertSame('hit_id', $e->id());
-            $this->assertEquals(TimeUnit::minute(), $e->cooldown());
+            $this->assertEquals(TimeUnit::minute(), $e->retryIn());
         }
     }
 
