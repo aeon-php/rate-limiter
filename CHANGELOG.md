@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## [0.3.0] - 2020-11-26
+### Added 
+- [#4](https://github.com/aeon-php/rate-limiter/pull/4) - **Added more details into RateLimitException #4** - [@norberttech](https://github.com/norberttech)
+
 ## [0.2.0] - 2020-11-24
 ### Added 
 - [#3](https://github.com/aeon-php/rate-limiter/pull/3) - **Added reset in and initial capacity to the rate limiter API #3** - [@norberttech](https://github.com/norberttech)
