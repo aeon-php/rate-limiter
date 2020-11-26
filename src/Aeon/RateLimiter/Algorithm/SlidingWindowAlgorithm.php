@@ -38,8 +38,13 @@ final class SlidingWindowAlgorithm implements Algorithm
         $hits = $storage->all($id);
 
         if ($hits->count() >= $this->limit) {
-            /** @phpstan-ignore-next-line */
-            throw new RateLimitException($id, $hits->oldest()->ttlLeft($this->calendar));
+            throw new RateLimitException(
+                $id,
+                $this->capacityInitial(),
+                /** @phpstan-ignore-next-line */
+                $hits->oldest()->ttlLeft($this->calendar),
+                $this->resetIn($id, $storage)
+            );
         }
 
         $storage->addHit($id, $this->timeWindow);
