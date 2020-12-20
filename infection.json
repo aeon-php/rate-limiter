@@ -35,10 +35,10 @@
     }
   },
   "testFramework": "phpunit",
-  "bootstrap": "./vendor/autoload.php",
   "phpUnit": {
     "customPath": "tools\/phpunit.phar"
   },
+  "bootstrap": "./vendor/autoload.php",
   "minMsi": 100,
   "minCoveredMsi": 100
 }
