@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## Unreleased
+
+## [0.4.0] - 2020-12-20
 ### Changed 
+- [#10](https://github.com/aeon-php/rate-limiter/pull/10) - **Updated tools, moved phpunit to tools #10 - [@norberttech](https://github.com/norberttech)
 - [#9](https://github.com/aeon-php/rate-limiter/pull/9) - **Moved phpunit to phars #9** - [@norberttech](https://github.com/norberttech)
 
 ## [0.3.0] - 2020-11-26
