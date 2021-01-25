@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Aeon\RateLimiter;
 
-use Aeon\Calendar\System\Process;
 use Aeon\Calendar\TimeUnit;
 use Aeon\RateLimiter\Exception\RateLimitException;
+use Aeon\Sleep\Process;
 
 final class RateLimiter
 {
