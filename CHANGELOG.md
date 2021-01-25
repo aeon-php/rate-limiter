@@ -1,4 +1,4 @@
-## [Unreleased] - 2021-01-25
+## [0.5.0] - 2021-01-25
 
 ### Added
 - [#15](https://github.com/aeon-php/rate-limiter/pull/15) - **aeon-php/automation integration** - [@norberttech](https://github.com/norberttech)
