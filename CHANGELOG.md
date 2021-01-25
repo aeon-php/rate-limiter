@@ -1,3 +1,14 @@
+## [Unreleased] - 2021-01-25
+
+### Added
+- [#15](https://github.com/aeon-php/rate-limiter/pull/15) - **aeon-php/automation integration** - [@norberttech](https://github.com/norberttech)
+
+### Changed
+- [11b528](https://github.com/aeon-php/rate-limiter/commit/11b5283b8c2347e566595e58b9c367ea744ef449) - **Update CHANGELOG.md** - [@norberttech](https://github.com/norberttech)
+
+### Fixed
+- [#15](https://github.com/aeon-php/rate-limiter/pull/15) - **namespaces change in one of the dependencies** - [@norberttech](https://github.com/norberttech)
+
 ## [0.4.0] - 2020-12-20
 
 ### Changed
