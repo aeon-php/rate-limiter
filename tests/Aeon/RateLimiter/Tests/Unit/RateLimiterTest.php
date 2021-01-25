@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Aeon\RateLimiter\Tests\Unit;
 
-use Aeon\Calendar\System\Process;
 use Aeon\Calendar\TimeUnit;
 use Aeon\RateLimiter\Algorithm;
 use Aeon\RateLimiter\Exception\RateLimitException;
 use Aeon\RateLimiter\RateLimiter;
 use Aeon\RateLimiter\Storage;
+use Aeon\Sleep\Process;
 use PHPUnit\Framework\TestCase;
 
 final class RateLimiterTest extends TestCase
