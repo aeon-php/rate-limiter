@@ -72,7 +72,7 @@ final class RateLimiter
             $this->algorithm->hit($id, $this->storage);
         } catch (RateLimitException $rateLimitException) {
             $process->sleep($rateLimitException->retryIn());
-            $this->algorithm->hit($id, $this->storage);
+            $this->throttle($id, $process);
         }
     }
 }
