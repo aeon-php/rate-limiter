@@ -1,3 +1,8 @@
+## [Unreleased] - 2021-02-24
+
+### Fixed
+- [#22](https://github.com/aeon-php/rate-limiter/pull/22) - **concurrency issue, when one process is sleeping and other already reduced available quota** - [@DawidSajdak](https://github.com/DawidSajdak)
+
 ## [0.5.0] - 2021-01-25
 
 ### Added
