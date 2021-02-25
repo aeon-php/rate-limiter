@@ -1,3 +1,8 @@
+## [0.7.0] - 2021-02-25
+
+### Fixed
+- [#23](https://github.com/aeon-php/rate-limiter/pull/23) - **rounding TTL of cached hit's into the nearest second making milliseconds time windows ignored** - [@DawidSajdak](https://github.com/DawidSajdak)
+
 ## [0.6.0] - 2021-02-24
 
 ### Fixed
