@@ -50,7 +50,9 @@ final class LeakyBucketAlgorithm implements Algorithm
             );
         }
 
-        $ttl = TimeUnit::seconds((int) (\floor($hits->count() / $this->leakSize) * $this->leakTime->inSeconds() + $this->leakTime->inSeconds()));
+        $ttl = TimeUnit::precise(
+            \floor($hits->count() / $this->leakSize) * (float) $this->leakTime->inSecondsPrecise() + (float) $this->leakTime->inSecondsPrecise()
+        );
 
         $storage->addHit($id, $ttl);
     }

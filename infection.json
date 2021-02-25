@@ -32,6 +32,11 @@
       "ignore": [
         "Aeon\\RateLimiter\\Storage\\PSRCacheStorage::all"
       ]
+    },
+    "CastFloat": {
+      "ignore": [
+        "Aeon\\RateLimiter\\Algorithm\\LeakyBucketAlgorithm::hit"
+      ]
     }
   },
   "testFramework": "phpunit",

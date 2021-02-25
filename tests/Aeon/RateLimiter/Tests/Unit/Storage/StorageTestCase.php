@@ -55,7 +55,7 @@ abstract class StorageTestCase extends TestCase
 
         $storage->addHit('id', TimeUnit::minute());
 
-        $calendar->setNow($calendar->now()->add(TimeUnit::minutes(1)));
+        $calendar->setNow($calendar->now()->add(TimeUnit::seconds(59)));
 
         $this->assertSame($storage->all('id')->count(), 1);
     }

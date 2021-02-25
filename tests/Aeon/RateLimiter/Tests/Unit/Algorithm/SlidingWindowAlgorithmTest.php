@@ -45,6 +45,22 @@ final class SlidingWindowAlgorithmTest extends TestCase
         $algorithm->hit('hit_id', $memoryStorage);
     }
 
+    public function test_hit_without_available_hits_with_additional_milliseconds() : void
+    {
+        $algorithm = new SlidingWindowAlgorithm($calendar = new GregorianCalendarStub(TimeZone::UTC()), 1, TimeUnit::seconds(1)->add(TimeUnit::milliseconds(500)));
+        $calendar->setNow(DateTime::fromString('2020-01-01 00:00:00 UTC'));
+
+        $algorithm->hit('hit_id', $memoryStorage = new MemoryStorage($calendar));
+
+        $this->expectException(RateLimitException::class);
+        $this->expectExceptionMessage('Execution "hit_id" was limited for the next 0.500000 seconds');
+        $this->expectExceptionCode(0);
+
+        $calendar->setNow($calendar->now()->add(TimeUnit::seconds(1)));
+
+        $algorithm->hit('hit_id', $memoryStorage);
+    }
+
     public function test_hit_without_available_hits_exception() : void
     {
         $algorithm = new SlidingWindowAlgorithm($calendar = new GregorianCalendarStub(TimeZone::UTC()), 1, TimeUnit::minute());
