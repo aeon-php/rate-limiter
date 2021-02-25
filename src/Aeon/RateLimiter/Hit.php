@@ -36,7 +36,7 @@ final class Hit
 
     public function expired(Calendar $calendar) : bool
     {
-        return !$this->dateTime->add($this->ttl)->isAfterOrEqual($calendar->now());
+        return !$this->dateTime->add($this->ttl)->isAfter($calendar->now());
     }
 
     public function isOlderThan(self $hit) : bool

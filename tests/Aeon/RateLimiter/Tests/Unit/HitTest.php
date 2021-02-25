@@ -22,15 +22,6 @@ final class HitTest extends TestCase
         $this->assertFalse($hit->expired($calendar));
     }
 
-    public function test_expire_when_hit_is_not_expired_but_on_expiration_edge() : void
-    {
-        $hit = new Hit('id', DateTime::fromString('2020-01-01 00:00:00 UTC'), TimeUnit::minute());
-        $calendar = new GregorianCalendarStub(TimeZone::UTC());
-        $calendar->setNow(DateTime::fromString('2020-01-01 00:01:00 UTC'));
-
-        $this->assertFalse($hit->expired($calendar));
-    }
-
     public function test_expire_when_hit_is_expired() : void
     {
         $hit = new Hit('id', DateTime::fromString('2020-01-01 00:00:00 UTC'), TimeUnit::minute());
