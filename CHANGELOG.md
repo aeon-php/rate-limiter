@@ -1,3 +1,8 @@
+## [Unreleased] - 2021-09-29
+
+### Changed
+- [588f6b](https://github.com/aeon-php/rate-limiter/commit/588f6b9d21bd5365c80ca7ef194feb965e3e9490) - **dependencies** - [@norberttech](https://github.com/norberttech)
+
 ## [0.7.0] - 2021-02-25
 
 ### Fixed
