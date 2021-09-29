@@ -5,9 +5,9 @@
   "keywords": ["ratelimiter", "throttling", "rate", "limiter"],
   "prefer-stable": true,
   "require": {
-    "php": ">=7.4.2",
+    "php": "^7.4.2 || ^8.0",
     "ext-json": "*",
-    "aeon-php/calendar": ">=0.14.0",
+    "aeon-php/calendar": "^1.0",
     "aeon-php/sleep": ">=0.6.0",
     "psr/cache": "^1.0",
     "symfony/polyfill-mbstring": "^1.0"
@@ -39,16 +39,23 @@
       "@test:mutation"
     ],
     "test": [
-      "tools/phpunit.phar"
+      "tools/vendor/bin/phpunit"
     ],
     "test:mutation": [
-      "tools/infection -j2"
+      "tools/vendor/bin/infection -j2"
     ],
     "static:analyze": [
-      "tools/psalm --output-format=compact",
-      "tools/phpstan analyze -c phpstan.neon",
-      "tools/php-cs-fixer fix --dry-run"
+      "tools/vendor/bin/psalm --output-format=compact",
+      "tools/vendor/bin/phpstan analyze -c phpstan.neon",
+      "tools/vendor/bin/php-cs-fixer fix --dry-run"
     ],
-    "cs:php:fix": "tools/php-cs-fixer fix"
+    "cs:php:fix": "tools/vendor/bin/php-cs-fixer fix",
+    "tools:install": "composer install --working-dir=./tools",
+    "post-install-cmd": [
+      "@tools:install"
+    ],
+    "post-update-cmd": [
+      "@tools:install"
+    ]
   }
 }
