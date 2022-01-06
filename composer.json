@@ -5,7 +5,7 @@
   "keywords": ["ratelimiter", "throttling", "rate", "limiter"],
   "prefer-stable": true,
   "require": {
-    "php": "^7.4.2 || ^8.0",
+    "php": "^7.4.2 || ^8.0 || ^8.1",
     "ext-json": "*",
     "aeon-php/calendar": "^1.0",
     "aeon-php/sleep": ">=0.6.0",
