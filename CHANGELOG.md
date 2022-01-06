@@ -1,6 +1,9 @@
-## [Unreleased] - 2021-09-29
+## [Unreleased] - 2022-01-06
 
 ### Changed
+- [a524ad](https://github.com/aeon-php/rate-limiter/commit/a524adb233b8ecfd2dc30de3c2cc9d07e3d3dd1c) - **custom workflows into aeon-php reusable workflows** - [@norberttech](https://github.com/norberttech)
+
+### Updated
 - [588f6b](https://github.com/aeon-php/rate-limiter/commit/588f6b9d21bd5365c80ca7ef194feb965e3e9490) - **dependencies** - [@norberttech](https://github.com/norberttech)
 
 ## [0.7.0] - 2021-02-25
