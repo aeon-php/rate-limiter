@@ -1,10 +1,13 @@
-## [Unreleased] - 2022-01-14
+## [Unreleased] - 2022-01-17
 
 ### Added
 - [f02ed7](https://github.com/aeon-php/rate-limiter/commit/f02ed71620ec410ee7459ea3352e8a09c6b1d312) - **php 8.1 to allowed versions** - [@norberttech](https://github.com/norberttech)
 
 ### Changed
 - [a524ad](https://github.com/aeon-php/rate-limiter/commit/a524adb233b8ecfd2dc30de3c2cc9d07e3d3dd1c) - **custom workflows into aeon-php reusable workflows** - [@norberttech](https://github.com/norberttech)
+
+### Fixed
+- [4a8746](https://github.com/aeon-php/rate-limiter/commit/4a874675f2425e9d427b26884fd97eb8b031eacc) - **PHP versions scope** - [@norberttech](https://github.com/norberttech)
 
 ### Updated
 - [627d72](https://github.com/aeon-php/rate-limiter/commit/627d72b38f7b802e3e905b5211fbcd53756483b6) - **infection** - [@norberttech](https://github.com/norberttech)
