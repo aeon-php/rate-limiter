@@ -1,4 +1,4 @@
-## [Unreleased] - 2022-06-19
+## [0.8.0] - 2022-06-19
 
 ### Added
 - [f02ed7](https://github.com/aeon-php/rate-limiter/commit/f02ed71620ec410ee7459ea3352e8a09c6b1d312) - **php 8.1 to allowed versions** - [@norberttech](https://github.com/norberttech)
