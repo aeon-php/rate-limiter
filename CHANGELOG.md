@@ -1,4 +1,4 @@
-## [Unreleased] - 2022-01-17
+## [Unreleased] - 2022-06-19
 
 ### Added
 - [f02ed7](https://github.com/aeon-php/rate-limiter/commit/f02ed71620ec410ee7459ea3352e8a09c6b1d312) - **php 8.1 to allowed versions** - [@norberttech](https://github.com/norberttech)
@@ -10,6 +10,7 @@
 - [4a8746](https://github.com/aeon-php/rate-limiter/commit/4a874675f2425e9d427b26884fd97eb8b031eacc) - **PHP versions scope** - [@norberttech](https://github.com/norberttech)
 
 ### Updated
+- [#63](https://github.com/aeon-php/rate-limiter/pull/63) - **Constraints for psr-cache to include v2 & v3** - [@GwendolenLynch](https://github.com/GwendolenLynch)
 - [627d72](https://github.com/aeon-php/rate-limiter/commit/627d72b38f7b802e3e905b5211fbcd53756483b6) - **infection** - [@norberttech](https://github.com/norberttech)
 - [fd1060](https://github.com/aeon-php/rate-limiter/commit/fd1060d7ae09ec09aa18f8d696d263fc4669a454) - **tools dependencies** - [@norberttech](https://github.com/norberttech)
 - [588f6b](https://github.com/aeon-php/rate-limiter/commit/588f6b9d21bd5365c80ca7ef194feb965e3e9490) - **dependencies** - [@norberttech](https://github.com/norberttech)
