@@ -1,3 +1,8 @@
+## [Unreleased] - 2022-07-22
+
+### Updated
+- [0880ac](https://github.com/aeon-php/rate-limiter/commit/0880ac0b254ff124ff918e5223decf93446c8528) - **dependencies** - [@norberttech](https://github.com/norberttech)
+
 ## [0.8.0] - 2022-06-19
 
 ### Added
