@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45d7e262b6da69f76a5a8a7340ad3527",
+    "content-hash": "6a6a0925ec2e6ccca0eef0972bebd82b",
     "packages": [
         {
             "name": "aeon-php/calendar",
-            "version": "1.0.4",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aeon-php/calendar.git",
-                "reference": "2b1c9bb578bd3bf9b47f9e7549bcd2a5bf5e4b25"
+                "reference": "0ea9a520a058e8a18ee70bfddad1117f490f0ffb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aeon-php/calendar/zipball/2b1c9bb578bd3bf9b47f9e7549bcd2a5bf5e4b25",
-                "reference": "2b1c9bb578bd3bf9b47f9e7549bcd2a5bf5e4b25",
+                "url": "https://api.github.com/repos/aeon-php/calendar/zipball/0ea9a520a058e8a18ee70bfddad1117f490f0ffb",
+                "reference": "0ea9a520a058e8a18ee70bfddad1117f490f0ffb",
                 "shasum": ""
             },
             "require": {
@@ -51,9 +51,9 @@
             ],
             "support": {
                 "issues": "https://github.com/aeon-php/calendar/issues",
-                "source": "https://github.com/aeon-php/calendar/tree/1.0.4"
+                "source": "https://github.com/aeon-php/calendar/tree/1.0.6"
             },
-            "time": "2022-01-28T13:12:23+00:00"
+            "time": "2022-08-22T16:52:49+00:00"
         },
         {
             "name": "aeon-php/sleep",
@@ -335,16 +335,16 @@
         },
         {
             "name": "symfony/cache",
-            "version": "v5.4.10",
+            "version": "v5.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "c4e387b739022fd4b20abd8edb2143c44c5daa14"
+                "reference": "5a0fff46df349f0db3fe242263451fddf5277362"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/c4e387b739022fd4b20abd8edb2143c44c5daa14",
-                "reference": "c4e387b739022fd4b20abd8edb2143c44c5daa14",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/5a0fff46df349f0db3fe242263451fddf5277362",
+                "reference": "5a0fff46df349f0db3fe242263451fddf5277362",
                 "shasum": ""
             },
             "require": {
@@ -412,7 +412,7 @@
                 "psr6"
             ],
             "support": {
-                "source": "https://github.com/symfony/cache/tree/v5.4.10"
+                "source": "https://github.com/symfony/cache/tree/v5.4.11"
             },
             "funding": [
                 {
@@ -428,7 +428,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-19T12:03:50+00:00"
+            "time": "2022-07-28T15:25:17+00:00"
         },
         {
             "name": "symfony/cache-contracts",
@@ -901,7 +901,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4.2 || ~8.0 || ~8.1",
+        "php": "^7.4.2 || ~8.0 || ~8.1.10",
         "ext-json": "*"
     },
     "platform-dev": [],
