@@ -7,7 +7,7 @@
   "require": {
     "php": "^7.4.2 || ~8.0 || ~8.1.10",
     "ext-json": "*",
-    "aeon-php/calendar": "^1.0",
+    "aeon-php/calendar": "^1.0.7",
     "aeon-php/sleep": ">=0.6.0",
     "psr/cache": "^1.0|^2.0|^3.0",
     "symfony/polyfill-mbstring": "^1.0"
