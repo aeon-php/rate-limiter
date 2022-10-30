@@ -1,9 +1,10 @@
-## [Unreleased] - 2022-09-11
+## [Unreleased] - 2022-10-30
 
 ### Fixed
 - [#69](https://github.com/aeon-php/rate-limiter/pull/69) - **Failing tests by updating min required PHP 8.1 to 8.1.10 that resolves internal PHP bug related to handling time units small then a second** - [@norberttech](https://github.com/norberttech)
 
 ### Updated
+- [ddc897](https://github.com/aeon-php/rate-limiter/commit/ddc8976febcee46756b228147cdcbe3191af555a) - **dependabot-auto-merge.yaml** - [@norberttech](https://github.com/norberttech)
 - [6eae3f](https://github.com/aeon-php/rate-limiter/commit/6eae3f40b743a99f84041e3463d93e477208d47f) - **aeon-php/calendar dependency** - [@norberttech](https://github.com/norberttech)
 - [8d7084](https://github.com/aeon-php/rate-limiter/commit/8d70848a07ac52cb8de977baac3a1dc414bea758) - **README.md** - [@norberttech](https://github.com/norberttech)
 - [0880ac](https://github.com/aeon-php/rate-limiter/commit/0880ac0b254ff124ff918e5223decf93446c8528) - **dependencies** - [@norberttech](https://github.com/norberttech)
