@@ -1,4 +1,4 @@
-## [Unreleased] - 2022-11-11
+## [Unreleased] - 2022-12-29
 
 ### Fixed
 - [#69](https://github.com/aeon-php/rate-limiter/pull/69) - **Failing tests by updating min required PHP 8.1 to 8.1.10 that resolves internal PHP bug related to handling time units small then a second** - [@norberttech](https://github.com/norberttech)
